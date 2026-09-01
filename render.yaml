@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: rare-naari
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npx prisma generate && npx prisma migrate deploy && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    # Persistent disk so admin-uploaded product images survive deploys.
+    # (Or swap the upload handler in src/app/api/admin/upload for S3/R2.)
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/public/uploads
+      sizeGB: 5
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: DELIVERY_PROVIDER
+        sync: false
+      - key: DELIVERY_API_KEY
+        sync: false
+      - key: DELIVERY_API_SECRET
+        sync: false
+      - key: DELIVERY_ACCOUNT_ID
+        sync: false
+      - key: DELIVERY_WEBHOOK_SECRET
+        sync: false
+
+databases:
+  - name: rare-naari-db
+    plan: basic-256mb
+    databaseName: rare_naari

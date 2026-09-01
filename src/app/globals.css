@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  /* Rare Naari palette — drawn from the terracotta + cream logo */
+  --color-terra-50: #faf3ef;
+  --color-terra-100: #f3e2d9;
+  --color-terra-200: #e6c3b3;
+  --color-terra-300: #d5a08a;
+  --color-terra-400: #c07d62;
+  --color-terra-500: #a85b44;
+  --color-terra-600: #8f4936;
+  --color-terra-700: #723a2c;
+  --color-terra-800: #5c3025;
+  --color-terra-900: #4a2820;
+
+  --color-cream-50: #fdfbf7;
+  --color-cream-100: #faf5ee;
+  --color-cream-200: #f3eadf;
+  --color-cream-300: #eadfd2;
+  --color-cream-400: #dccbb8;
+
+  --color-ink-900: #241d1a;
+  --color-ink-800: #2b2320;
+  --color-ink-600: #4f4239;
+  --color-ink-400: #8a7a6e;
+  --color-ink-300: #b0a294;
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream-50);
+  color: var(--color-ink-800);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Never let anything spill horizontally on mobile */
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: var(--color-terra-200);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Hide scrollbar for horizontal scrollers but keep them scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Elegant focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-terra-500);
+  outline-offset: 2px;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s ease both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--color-cream-200) 25%, var(--color-cream-100) 50%, var(--color-cream-200) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Prose styling for CMS pages */
+.rn-prose h2 { font-family: var(--font-display); font-size: 1.5rem; margin: 1.75rem 0 0.6rem; }
+.rn-prose h3 { font-weight: 600; margin: 1.25rem 0 0.4rem; }
+.rn-prose p { margin: 0.6rem 0; line-height: 1.75; color: var(--color-ink-600); }
+.rn-prose ul { list-style: disc; padding-left: 1.25rem; margin: 0.6rem 0; color: var(--color-ink-600); }
+.rn-prose li { margin: 0.25rem 0; line-height: 1.6; }
+.rn-prose a { color: var(--color-terra-600); text-decoration: underline; }
+.rn-prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
+.rn-prose th, .rn-prose td { border: 1px solid var(--color-cream-300); padding: 0.5rem 0.75rem; text-align: left; }
+.rn-prose th { background: var(--color-cream-100); }
